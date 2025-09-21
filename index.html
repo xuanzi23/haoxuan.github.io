@@ -1,24 +1,278 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="hUTF-8" />
-    <link rel="icon" type="image/svg+xml" class="rounded-b-4xl w-8 text-white" href="/logo.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/index.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hao Xuan Yap – iOS Engineer & Product Builder</title>
+  <meta name="description" content="Portfolio of Hao Xuan Yap – iOS engineer specializing in SwiftUI, TCA, analytics, and high‑performance mobile experiences." />
+  <meta name="theme-color" content="#0ea5e9" />
 
-    <style>
-        /* Google font - Work Sans */
-        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-    </style>
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hao Xuan Yap – iOS Engineer & Product Builder" />
+  <meta property="og:description" content="Swift + SwiftUI + TCA | Analytics | Performance. Selected projects, writing, and contact." />
+  <meta property="og:image" content="/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <title>Picto - Personal portfolio</title>
+  <!-- Favicon placeholders (optional). Replace with your files in /assets -->
+  <link rel="icon" href="/assets/favicon.ico" />
+
+  <!-- Fonts (system stack for speed). Swap for your own if you like. -->
+  <style>
+    :root {
+      --bg: #0b1020;           /* dark navy */
+      --panel: #11162a;        /* elevated card */
+      --text: #e6e8ef;         /* primary text */
+      --muted: #a8b0c3;        /* secondary text */
+      --brand: #0ea5e9;        /* cyan */
+      --brand-2: #22c55e;      /* green */
+      --border: #1e2745;
+      --shadow: 0 10px 30px rgba(2, 6, 23, 0.45);
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#f7fafc; --panel:#ffffff; --text:#0f172a; --muted:#475569; --border:#e2e8f0; --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);} 
+    }
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; }
+    body { margin:0; font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color:var(--text); background: radial-gradient(1200px 600px at 10% 0%, rgba(14,165,233,.12), transparent 60%), radial-gradient(1000px 500px at 90% 10%, rgba(34,197,94,.10), transparent 60%), var(--bg); }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+    .nav { position: sticky; top:0; backdrop-filter: saturate(140%) blur(8px); background: color-mix(in oklab, var(--bg) 80%, transparent); border-bottom:1px solid var(--border); z-index: 50; }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; padding: .9rem 0; }
+    .brand { font-weight: 800; letter-spacing: .2px; }
+    .brand b { color: var(--brand); }
+    .menu a { margin-left: 1.2rem; color: var(--text); opacity:.9; }
+    .menu a:hover { opacity:1; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; border:1px solid var(--border); background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 80%, transparent), var(--panel)); color:var(--text); padding:.65rem .95rem; border-radius: .9rem; box-shadow: var(--shadow); text-decoration:none; }
+    .btn:hover { transform: translateY(-1px); transition: .15s ease; text-decoration:none; }
+    .btn.primary { border-color: color-mix(in oklab, var(--brand) 40%, var(--border)); background: linear-gradient(180deg, color-mix(in oklab, var(--brand) 20%, var(--panel)), var(--panel)); }
+
+    /* Hero */
+    .hero { padding: 5rem 0 3rem; display:grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items:center; }
+    .eyebrow { display:inline-block; font-size:.85rem; letter-spacing:.08em; color: var(--muted); border:1px solid var(--border); border-radius:999px; padding:.25rem .6rem; margin-bottom: .9rem; }
+    h1 { font-size: clamp(2rem, 4vw, 3.2rem); line-height:1.15; margin:.2rem 0 1rem; }
+    .lead { color:var(--muted); font-size: clamp(1rem, 1.6vw, 1.125rem); }
+    .cta { display:flex; gap:.7rem; flex-wrap:wrap; margin-top:1.2rem; }
+    .card { background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 92%, transparent), var(--panel)); border:1px solid var(--border); border-radius: 1.1rem; padding:1.1rem; box-shadow: var(--shadow); }
+    .avatar { aspect-ratio: 1/1; border-radius: 1rem; border:1px solid var(--border); background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.06), transparent 40%), url('https://picsum.photos/600?random=7') center/cover; min-height: 240px; }
+
+    /* Sections */
+    section { padding: 3rem 0; }
+    .section-title { font-size: 1.6rem; margin: 0 0 1rem; }
+    .muted { color: var(--muted); }
+
+    /* Grid */
+    .grid { display:grid; gap: 1rem; }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    @media (max-width: 900px){ .hero { grid-template-columns: 1fr; } .grid.cols-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px){ .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; } }
+
+    /* Project cards */
+    .proj { display:flex; gap: .9rem; }
+    .thumb { width: 140px; min-width: 140px; height: 92px; border-radius:.8rem; background: linear-gradient(120deg, rgba(14,165,233,.15), rgba(34,197,94,.15)); border:1px solid var(--border); position:relative; overflow:hidden; }
+    .thumb::after { content:""; position:absolute; inset:0; background: linear-gradient(45deg, transparent 60%, rgba(255,255,255,.18) 61%, transparent 62%); transform: translateX(-100%); animation: shine 3s infinite; }
+    @keyframes shine { 100% { transform: translateX(100%); } }
+    .proj h3 { margin:.1rem 0 .2rem; font-size: 1.05rem; }
+    .tags { display:flex; flex-wrap: wrap; gap:.4rem; margin-top:.4rem; }
+    .tag { font-size:.78rem; color:var(--muted); border:1px solid var(--border); padding:.15rem .45rem; border-radius: .6rem; }
+
+    /* Skills */
+    .chips { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .chip { border:1px solid var(--border); padding:.4rem .6rem; border-radius:.6rem; background: linear-gradient(180deg, color-mix(in oklab, var(--panel) 90%, transparent), var(--panel)); }
+
+    /* Timeline */
+    .timeline { position:relative; }
+    .timeline::before { content:""; position:absolute; left:9px; top:0; bottom:0; width:2px; background: var(--border); }
+    .tl-item { position:relative; padding-left: 2.2rem; margin: 1.1rem 0; }
+    .tl-item::before { content:""; position:absolute; left:3px; top:.3rem; width:14px; height:14px; border-radius:50%; background: var(--brand); box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 20%, var(--panel)); }
+
+    /* Footer */
+    footer { border-top:1px solid var(--border); padding: 2rem 0 3rem; color: var(--muted); }
+    .social { display:flex; gap:.7rem; }
+    .social a { display:inline-flex; border:1px solid var(--border); padding:.5rem; border-radius:.7rem; }
+
+    /* Utilities */
+    .row { display:flex; align-items:center; gap:.7rem; flex-wrap:wrap; }
+    .space { height: .8rem; }
+    .right { margin-left:auto; }
+    .center { text-align:center; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    /* Print */
+    @media print { .nav, .cta .btn[href*="mailto:"] { display:none !important; } body { background: #fff; } }
+  </style>
+
+  <script>
+    // Dark/Light toggle with localStorage (optional)
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') document.documentElement.classList.add('light');
+    })();
+    function toggleTheme(){
+      const isLight = document.documentElement.classList.toggle('light');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
+  </script>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hao Xuan Yap",
+    "jobTitle": "Senior iOS Engineer",
+    "url": "https://<your-username>.github.io/",
+    "sameAs": [
+      "https://github.com/<your-username>",
+      "https://www.linkedin.com/in/<your-linkedin>"
+    ]
+  }
+  </script>
 </head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
 
-<body class="">
-    <div id="root" class=""></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <script type="module" src="https://unpkg.com/cally"></script>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">HaoXuan<b>.dev</b></div>
+      <div class="row">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="#" onclick="toggleTheme(); return false;" aria-label="Toggle theme">🌗 Theme</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="container hero" id="main">
+    <div>
+      <span class="eyebrow">iOS • SwiftUI • TCA • Analytics</span>
+      <h1>Building fast, instrumented mobile apps for real users.</h1>
+      <p class="lead">I’m <strong>Hao Xuan</strong>, an iOS engineer focused on performance, analytics quality, and delightful UX at scale. I turn product goals into measurable outcomes.</p>
+      <div class="cta">
+        <a class="btn primary" href="/assets/resume.pdf" target="_blank" rel="noopener">📄 View Résumé</a>
+        <a class="btn" href="mailto:hello@example.com">✉️ Email me</a>
+        <a class="btn" href="https://github.com/<your-username>" target="_blank" rel="noopener">🐙 GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/<your-linkedin>" target="_blank" rel="noopener">🔗 LinkedIn</a>
+      </div>
+    </div>
+    <div class="card avatar" aria-label="Profile image placeholder"></div>
+  </header>
+
+  <main class="container">
+    <!-- Projects -->
+    <section id="projects">
+      <div class="row">
+        <h2 class="section-title">Selected Projects</h2>
+        <a class="right" href="https://github.com/<your-username>?tab=repositories" target="_blank" rel="noopener">View all →</a>
+      </div>
+      <div class="grid cols-3">
+        <!-- Project Card 1 -->
+        <article class="card proj">
+          <div class="thumb" role="img" aria-label="Project thumbnail"></div>
+          <div>
+            <h3>Everything Food – iOS App</h3>
+            <p class="muted">Led a redesign with SwiftUI + TCA, improved cold start by 28%, and shipped a robust analytics pipeline (Segment → GA4 → Amplitude).</p>
+            <div class="tags">
+              <span class="tag">SwiftUI</span>
+              <span class="tag">TCA</span>
+              <span class="tag">GA4</span>
+              <span class="tag">Performance</span>
+            </div>
+          </div>
+        </article>
+        <!-- Project Card 2 -->
+        <article class="card proj">
+          <div class="thumb" role="img" aria-label="Project thumbnail"></div>
+          <div>
+            <h3>GO25 – Ride Booking Platform</h3>
+            <p class="muted">Stabilized PHP backend on AWS, fixed 504s, optimized MySQL queries, and added FCM push + SES templates.</p>
+            <div class="tags">
+              <span class="tag">PHP</span>
+              <span class="tag">AWS</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">DevOps</span>
+            </div>
+          </div>
+        </article>
+        <!-- Project Card 3 -->
+        <article class="card proj">
+          <div class="thumb" role="img" aria-label="Project thumbnail"></div>
+          <div>
+            <h3>Analytics Standards & Tooling</h3>
+            <p class="muted">Unified event schema across teams, added 50% visibility tracking, debounce click, and test harnesses for correctness.</p>
+            <div class="tags">
+              <span class="tag">Analytics</span>
+              <span class="tag">Testing</span>
+              <span class="tag">SDK</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="chips">
+        <span class="chip">Swift • SwiftUI • UIKit</span>
+        <span class="chip">TCA • Combine • RxSwift</span>
+        <span class="chip">Segment • Firebase GA4 • Amplitude</span>
+        <span class="chip">XCTest • Instruments • Profiling</span>
+        <span class="chip">PHP • MySQL • AWS EC2/SES/FCM</span>
+        <span class="chip">Design Systems • Accessibility</span>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2 class="section-title">Experience</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="row"><strong>FairPrice Group</strong> <span class="muted">— Senior iOS Engineer</span> <span class="right muted">2023 — Present</span></div>
+          <p class="muted">Own OmniHome modules, refactor to TCA, remove tech debt (30+ flags), and uplift performance and analytics quality.</p>
+        </div>
+        <div class="tl-item">
+          <div class="row"><strong>GO25</strong> <span class="muted">— Full‑stack / Infra</span> <span class="right muted">2021 — 2023</span></div>
+          <p class="muted">Stabilized operations, resolved 500/504s, automated alerts, improved DB indexes, and added admin tooling.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <p class="muted">Want to collaborate or have a role in mind? Reach out.</p>
+      <div class="row">
+        <a class="btn primary" href="mailto:hello@example.com">✉️ hello@example.com</a>
+        <a class="btn" href="https://cal.com/<your-handle>" target="_blank" rel="noopener">📅 Book a chat</a>
+        <a class="btn" href="https://github.com/<your-username>" target="_blank" rel="noopener">🐙 GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container row">
+      <div>© <span id="y"></span> Hao Xuan Yap</div>
+      <div class="right social">
+        <a href="https://github.com/<your-username>" aria-label="GitHub" target="_blank" rel="noopener" title="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.74.08-.74 1.22.09 1.87 1.25 1.87 1.25 1.08 1.85 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.28-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.83.58A12 12 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/<your-linkedin>" aria-label="LinkedIn" target="_blank" rel="noopener" title="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5H4.5V23.5H.5V8.5zm7.98 0h3.83v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.04 0 4.79 2.66 4.79 6.11V23.5H17.8v-5.79c0-1.38-.03-3.15-1.92-3.15-1.92 0-2.22 1.5-2.22 3.05V23.5H8.48V8.5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year update
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
-
 </html>
